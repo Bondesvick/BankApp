@@ -17,7 +17,7 @@ namespace BankApp
                 {
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.Black;
-                    Console.WriteLine("Type X and press Enter to terminate all operation \nType C and press Enter to register a customer \nType L and press Enter to LogIn a customer \nType LO and press Enter to LogOut a customer \nType A and press Enter to create a bank account for a customer \nType AC and press Enter to show details all accounts owned by a customer \nType D and press Enter to make deposit into an account \nType W and press Enter to make a withdrawal form an customer \nType T and press Enter to transfer funds to an account \nType S and press Enter to print the statement of an account \n");
+                    Console.WriteLine("Type X and press Enter to terminate all operation \nType C and press Enter to register a customer \nType L and press Enter to LogIn a customer \nType LO and press Enter to LogOut a customer \nType A and press Enter to create a bank account for a customer \nType AC and press Enter to show details all accounts owned by a customer \nType D and press Enter to make deposit into an account \nType W and press Enter to make a withdrawal form an customer \nType T and press Enter to transfer funds to an account \nType S and press Enter to print the statement of an account \n \nType G and press Enter to print the statement of an account \n");
                     Console.BackgroundColor = ConsoleColor.Black;
                     Console.ForegroundColor = ConsoleColor.White;
                     var response = Console.ReadLine();
@@ -63,6 +63,10 @@ namespace BankApp
 
                             case "s":
                                 BankOperations.PrintStatement();
+                                break;
+
+                            case "g":
+                                BankOperations.GetBalance();
                                 break;
                         }
                     }

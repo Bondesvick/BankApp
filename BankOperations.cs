@@ -157,6 +157,14 @@ namespace BankApp
         }
 
         /// <summary>
+        /// A method used to display the balance in an account
+        /// </summary>
+        public static void GetBalance()
+        {
+            Console.WriteLine(GetAccount("display is balance").Balance);
+        }
+
+        /// <summary>
         /// for displaying statement of a bank account
         /// </summary>
         public static void PrintStatement()
