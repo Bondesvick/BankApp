@@ -7,7 +7,9 @@ namespace BankApp
         private static void Main(string[] args)
         {
             Console.Beep();
-            Console.WriteLine("Welcome");
+            Console.WriteLine("==========================================");
+            Console.WriteLine("                 WELCOME");
+            Console.WriteLine("==========================================");
 
             var running = true;
 
