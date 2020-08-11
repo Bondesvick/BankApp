@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BankApp.BankData;
 
-namespace BankApp
+namespace BankApp.Libraries
 {
     /// <summary>
     /// A class that holds the blueprint of Customer account and all transactions made
     /// </summary>
-    internal class Account
+    public class Account : IAccount
     {
         public string AccountNumber { get; }
         public Customer AccountOwner { get; }
@@ -22,14 +23,14 @@ namespace BankApp
         {
             get
             {
-                return _allTransactions.Sum(item => item.Amount);
+                return AllTransactions.Sum(item => item.Amount);
             }
         }
 
         /// <summary>
         /// Holds the history of all transactions made on an account
         /// </summary>
-        private readonly List<Transaction> _allTransactions = new List<Transaction>();
+        public List<Transaction> AllTransactions { get; }
 
         private static int _accountNumSeed = 0000000001;
 
@@ -48,6 +49,7 @@ namespace BankApp
             AccountNumber = _accountNumSeed.ToString().PadLeft(10, '0');
             _accountNumSeed++;
 
+            AllTransactions = new List<Transaction>();
             AccountOwner = accountOwner;
             OwnerName = ownerName;
             OwnerId = ownerId;
@@ -59,17 +61,17 @@ namespace BankApp
             {
                 // For current account
                 case AccountType.Current when initialBalance < 1000:
-                    //throw new InvalidOperationException($"{nameof(initialBalance)}, Amount too low for creating this type of Account");
-                    Console.WriteLine("Amount too low for creating this type of Account");
-                    return;
+                    throw new InvalidOperationException($"{nameof(initialBalance)}, Amount too low for creating this type of Account");
+                //Console.WriteLine("Amount too low for creating this type of Account");
+                //return;
                 // For savings account
                 case AccountType.Savings when initialBalance < 100:
-                    //throw new InvalidOperationException($"{nameof(initialBalance)}, Amount too low for creating this type of Account");
-                    Console.WriteLine("Amount too low for creating this type of Account");
-                    return;
+                    throw new InvalidOperationException($"{nameof(initialBalance)}, Amount too low for creating this type of Account");
+                //Console.WriteLine("Amount too low for creating this type of Account");
+                //return;
 
                 default:
-                    //Adding the account the Bank's Customer List
+                    //Adding the account to the Bank's Account List
                     AddThisAccount();
 
                     //Crediting the initial amount
@@ -115,14 +117,14 @@ namespace BankApp
 
             if (amount <= 0)
             {
-                Console.WriteLine("Amount of deposit must be positive");
-                return;
-                //throw new ArgumentOutOfRangeException(nameof(amount), "Amount of deposit must be positive");
+                //Console.WriteLine("Amount of deposit must be positive");
+                //return;
+                throw new ArgumentOutOfRangeException(nameof(amount), "Amount of deposit must be positive");
             }
 
             //Saving the transaction made
             var deposit = new Transaction(AccountOwner, AccountNumber, Type, amount, Balance, Balance + amount, TransactionType.Deposit, date, note);
-            _allTransactions.Add(deposit);
+            AllTransactions.Add(deposit);
 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine($"{amount:N} was credited to the account {this.AccountNumber} owned by {this.OwnerName}, current balance is {this.Balance:N} Naira");
@@ -139,17 +141,17 @@ namespace BankApp
             //Ensuring that the customer is logged in
             if (!AccountOwner.IsLoggedIn)
             {
-                Console.WriteLine("You need to log in first before making this operation");
-                return;
-                //throw new InvalidOperationException("You need to log in first before making this operation");
+                //Console.WriteLine("You need to log in first before making this operation");
+                //return;
+                throw new InvalidOperationException("You need to log in first before making this operation");
             }
 
             //Checking for negative values
             if (amount <= 0)
             {
-                Console.WriteLine("Amount of withdrawal must be positive");
-                return;
-                //throw new ArgumentOutOfRangeException(nameof(amount), "Amount of withdrawal must be positive");
+                //Console.WriteLine("Amount of withdrawal must be positive");
+                throw new ArgumentOutOfRangeException(nameof(amount), "Amount of withdrawal must be positive");
+                //return;
             }
 
             //Making sure savings account Balance doesn't go below 100
@@ -161,16 +163,16 @@ namespace BankApp
             }
 
             //Making sure the Balance doesn't go below 0(zero)
-            if (Balance - amount < 0)
+            if (Balance - amount <= 0)
             {
-                Console.WriteLine("No sufficient funds for this withdrawal");
-                return;
-                //throw new InvalidOperationException("No sufficient funds for this withdrawal");
+                //Console.WriteLine("No sufficient funds for this withdrawal");
+                //return;
+                throw new InvalidOperationException("No sufficient funds for this withdrawal");
             }
 
             //Saving the transaction made
             var withdrawal = new Transaction(AccountOwner, AccountNumber, Type, -amount, Balance, (Balance + (-amount)), TransactionType.Withdrawal, date, note);
-            _allTransactions.Add(withdrawal);
+            this.AllTransactions.Add(withdrawal);
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine($"{amount:N} was debited from the account {this.AccountNumber} owned by {this.OwnerName}, current balance is { this.Balance:N} Naira");
@@ -230,7 +232,7 @@ namespace BankApp
             //    report.AppendLine($"{item.Date.ToShortDateString()}\t{item.Amount}\t{balance}\t{item.Notes}");
             //}
 
-            _allTransactions.ForEach(item =>
+            AllTransactions.ForEach(item =>
             {
                 balance += item.Amount;
                 report.AppendLine($"{item.Date.ToShortDateString()}\t{item.Amount:N}\t{balance:N}\t{item.Notes}");

@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hp\\Documents\\Visual Studio 2019\\Projects\\BankApp\\BankApp.csproj",
+      "projectUniqueName": "C:\\Users\\hp\\Desktop\\bankapp_refactored_week4\\BankApp\\BankApp.csproj",
       "projectName": "BankApp",
-      "projectPath": "C:\\Users\\hp\\Documents\\Visual Studio 2019\\Projects\\BankApp\\BankApp.csproj",
+      "projectPath": "C:\\Users\\hp\\Desktop\\bankapp_refactored_week4\\BankApp\\BankApp.csproj",
       "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hp\\Documents\\Visual Studio 2019\\Projects\\BankApp\\obj\\",
+      "outputPath": "C:\\Users\\hp\\Desktop\\bankapp_refactored_week4\\BankApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"

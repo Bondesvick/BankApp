@@ -1,11 +1,12 @@
 ﻿using System;
+using BankApp.Libraries;
 
-namespace BankApp
+namespace BankApp.BankData
 {
     /// <summary>
     /// A class that holds the blueprint of transaction made
     /// </summary>
-    internal class Transaction
+    public class Transaction
     {
         public Customer Owner { get; }
         public string OwnerFullName { get; }

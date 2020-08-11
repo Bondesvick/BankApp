@@ -1,9 +1,9 @@
-﻿namespace BankApp
+﻿namespace BankApp.BankData
 {
     /// <summary>
     /// An Enumeration class holding the Transaction types
     /// </summary>
-    internal enum TransactionType
+    public enum TransactionType
     {
         Deposit,
         Withdrawal

@@ -1,6 +1,8 @@
 ﻿using System;
+using BankApp.BankData;
+using BankApp.Libraries;
 
-namespace BankApp
+namespace BankApp.Helpers
 {
     internal class BankOperations
     {
@@ -184,7 +186,6 @@ namespace BankApp
         /// Getting a customer instance with his user name
         /// </summary>
         /// <param name="userName">The user name to check for a match</param>
-        /// <param name="password">The password to check for a match</param>
         /// <returns>The return customer</returns>
         public static Customer GetCustomer(string userName)
         {

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using BankApp.Libraries;
 
-namespace BankApp
+namespace BankApp.BankData
 {
-    internal class Bank
+    public class Bank
     {
         public Bank()
         {

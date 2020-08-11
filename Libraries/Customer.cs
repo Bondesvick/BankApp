@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using BankApp.BankData;
 
-namespace BankApp
+namespace BankApp.Libraries
 {
     /// <summary>
     /// A blueprint to hold customer details in the Bank
     /// </summary>
-    internal class Customer
+    public class Customer : ICustomer
     {
         public int CustomerId { get; }
         private readonly string _firstname;

@@ -1,9 +1,9 @@
-﻿namespace BankApp
+﻿namespace BankApp.Libraries
 {
     /// <summary>
     /// An Enumeration class holding the Account types
     /// </summary>
-    internal enum AccountType
+    public enum AccountType
     {
         Savings,
         Current
